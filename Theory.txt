@@ -1,0 +1,37 @@
+NODEJS BASICS :
+//Setting up routes & middlewares. Middlewares : handles requests on website
+app.use(express.json()); //parse all incoming JSON files using "use" middleware
+
+//Static Routing
+app.get("/hello", (req,res,next) => {
+  return res.send("Hello");
+})
+
+app.post("/hello", (req,res,next) => {
+  console.log(req.body.name); //Static request from { "name":"Tamojit" }
+  return res.send("Hello");
+})
+
+//Dynamic routing : passing user id into base url
+app.delete("/user/:id", (req,res,next) => {
+  console.log(req.params.id); //Dynamic request
+  return res.send("Hello");
+})
+
+
+Middlewares : Middlewares are functions which gets executed before a request is processed. They can be used to check JSON body validations, tokens or cookies validations, params validations etc.
+
+Token Authorization : Once the user authenticates, he is provided a token. Now to access a resource, the user needs to show a token that was sent during authentication. This ensures that the user is entitled to a resource.
+
+JWT : JSON Web Token(JWT) is used to encrypt a payload into a signed token that has the Permissions or Authorities of the user.
+
+HTTP Only Cookies : They are a type of web cookies that comes with a special security attribute that restricts cookies from being accessed by JavaScript in the web-browser. This prevents XSS attacks. 
+
+Auth Process Workflow :
+User authenticates --->  Sets HTTP only signed Cookie ---> User now has the Token to access our app.
+
+Access Protected Resource :
+-- User sends back the cookie to access our resources ---->If Cookie MATCHES and tokens are VALID ----> Process the request
+-- User sends back the cookie to access our resources ---->If Cookie DOESN'T MATCH and tokens are INVALID ----> Abort the Operation.
+
+Axios : npm package to facilitate communication b/w backend and frontend, mainly used for API calling & exchanging API Tokens.
